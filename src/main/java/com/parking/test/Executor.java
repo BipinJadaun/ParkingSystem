@@ -23,10 +23,7 @@ public class Executor {
 		context = new ClassPathXmlApplicationContext("/com/parking/config/applicationContext.xml");
 		parking = context.getBean("parkingEndPoint", ParkingEndPoint.class);
 		
-		if(args[0].contains(".txt"))
-			executeCommandsFromFile(args[0]);
-		else
-			executeCommand(args);
+		executeCommandsFromFile("file_inputs.txt");
 	}
 
 	private static void executeCommandsFromFile(String fileName) {		
