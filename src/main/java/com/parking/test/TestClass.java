@@ -1,3 +1,5 @@
+package com.parking.test;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -14,7 +16,7 @@ public class TestClass {
 	
 	@BeforeClass
 	public static void setUp() throws Exception{
-		context = new ClassPathXmlApplicationContext("/com/parking/resources/applicationContext.xml");
+		context = new ClassPathXmlApplicationContext("/com/parking/config/applicationContext.xml");
 		parking = context.getBean("parkingEndPoint", ParkingEndPoint.class);
 	}
 
@@ -40,6 +42,7 @@ public class TestClass {
 		parking.park(vehicle6);
 		
 		parking.leave(4);
+		parking.leave(2);
 		
 		parking.status();
 		

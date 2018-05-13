@@ -1,3 +1,4 @@
+package com.parking.test;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -19,9 +20,13 @@ public class Executor {
 
 	public static void main(String[] args) {
 
-		context = new ClassPathXmlApplicationContext("/com/parking/resources/applicationContext.xml");
+		context = new ClassPathXmlApplicationContext("/com/parking/config/applicationContext.xml");
 		parking = context.getBean("parkingEndPoint", ParkingEndPoint.class);
-		executeCommandsFromFile("file_inputs.txt");
+		
+		if(args[0].contains(".txt"))
+			executeCommandsFromFile(args[0]);
+		else
+			executeCommand(args);
 	}
 
 	private static void executeCommandsFromFile(String fileName) {		
@@ -33,7 +38,7 @@ public class Executor {
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
 			while((line = bufferedReader.readLine()) != null) {
-				executeCommand(line);
+				executeCommand(line.split(" "));
 			}			
 			bufferedReader.close();			
 		} 
@@ -44,8 +49,8 @@ public class Executor {
 		}
 	}
 
-	private static void executeCommand(String commands) {		
-		String[] arr = commands.split(" ");
+	private static void executeCommand(String[] arr) {		
+	
 		String command = arr[0];
 
 		if(Command.CREATE_PARKING_LOT.toString().equalsIgnoreCase(command)) {
